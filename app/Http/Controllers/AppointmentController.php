@@ -17,11 +17,13 @@ class AppointmentController extends Controller
     protected $appointment;
 
     public function __construct(
-        AppointmentRepository $appointment_repository
+        AppointmentRepository $appointment_repository,
+        RecordRepository $record_repository
         )
     {
         $this->middleware('auth');
         $this->appointment = $appointment_repository;
+        $this->record = $record_repository;
     }
 
 
@@ -56,7 +58,7 @@ class AppointmentController extends Controller
                 $record->id
             );
 
-            return redirect()->route('records')->with(['message' => 'Consulta agregada exitosamente ✨']);
+            return redirect()->back()->with(['message' => 'Consulta agregada exitosamente ✨']);
 
 
         } catch(\Exception $e){

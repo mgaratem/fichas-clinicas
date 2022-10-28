@@ -252,7 +252,7 @@ class RecordController extends Controller
     {
         Log::debug("------------------RecordController/update---------------------------");
 
-        // TODO
+        // TODO: UPDATE CLINICAL RECORD DATA
     }
 
 
@@ -268,7 +268,7 @@ class RecordController extends Controller
 
         try {
 
-            // TODO            
+            // TODO: DESTROY CLINICAL RECORD & PATIENT AND APPOINTMENTS ASSOCIATED
 
             return redirect()->route('records')->with(['message' => 'Ficha clínica eliminada exitosamente! ✨']);
 
