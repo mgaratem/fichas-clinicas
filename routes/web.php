@@ -32,8 +32,11 @@ Route::group( ['prefix' => 'records'] ,function () {
     Route::post('store', 'RecordController@store')->middleware('auth')->name('record.store');
     Route::get('{uuid}', 'RecordController@show')->middleware('auth')->name('record.show');
     Route::get('{uuid}/edit', 'RecordController@edit')->middleware('auth')->name('record.edit');
-    Route::post('{uuid}/update', 'RecordController@update')->middleware('auth')->name('record.update');
+    Route::post('{record}/update', 'RecordController@update')->middleware('auth')->name('record.update');
     Route::post('{uuid}/delete', 'RecordController@destroy')->middleware('auth')->name('record.delete');
+
+    /*_______ PDF _______ */
+    Route::get('{uuid}/pdf', 'FileController@createPDF')->middleware('auth')->name('record.generate');
 });
 
 /*_______ APPOINTMENTS _______ */
@@ -45,4 +48,4 @@ Route::group( ['prefix' => 'appointments'] ,function () {
 });
 
 /*_______ PACIENTS _______ */
-Route::get('/patients','PatientController@index')->name('patients')->middleware(['auth', 'role']);
+Route::get('/patients', 'PatientController@index')->name('patients')->middleware(['auth', 'role']);

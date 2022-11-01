@@ -28,7 +28,7 @@ class AppointmentRepository  {
     {
         $appointments = Appointment::select('*')
                     ->where('record_id', $record_id)
-                    ->orderBy('created_at', 'DESC')
+                    ->orderBy('consultation_date', 'DESC')
                     ->paginate(10);
 
         return $appointments;

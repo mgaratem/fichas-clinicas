@@ -10,6 +10,8 @@ use App\Repositories\RecordRepository;
 use App\Repositories\PatientRepository;
 use App\Repositories\AppointmentRepository;
 
+use App\Models\Record;
+
 use Validator;
 use Freshwork\ChileanBundle\Rut;
 
@@ -40,7 +42,7 @@ class RecordController extends Controller
     */
     public function index(Request $request)
     {
-        Log::debug("----------------------RecordController/index----------------------------");
+        Log::debug("------------------RecordController/index---------------------------");
 
         $filter = $request->has('filter') ? $request->get('filter') : 'uuid';
         $query = trim($request->get('search'));
@@ -189,7 +191,7 @@ class RecordController extends Controller
                 $request->maternal_name,
                 $request->rut,
                 $request->gender,
-                $request->birth_date,
+                date('Y-m-d', strtotime($request->birth_date)),
                 $request->occupation,
                 $request->address,
                 $request->city,
@@ -248,11 +250,57 @@ class RecordController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update($uuid)
+    public function update(Request $request, Record $record)
     {
         Log::debug("------------------RecordController/update---------------------------");
 
-        // TODO: UPDATE CLINICAL RECORD DATA
+        try{
+            $validator = Validator::make($request->all(),
+            [
+                'physical_activity'         => ['required', 'string'],
+                'morbid_background'         => ['required', 'string'],
+                'reason_consultation'       => ['required', 'string'],
+                'postural_observation'      => ['required', 'string'],
+                'palpation'                 => ['required', 'string'],
+                'flexibility'               => ['required', 'string'],
+                'muscle_evaluation'         => ['required', 'string'],
+                'neurological_evaluation'   => ['required', 'string'],
+                'functional_testing'        => ['required', 'string']
+            ]);
+
+            if ($validator->fails()){
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $anamnesis = json_encode([
+                "remote_anamnesis" => [
+                    "physical_activity" => $request->physical_activity,
+                    "morbid_background" => $request->morbid_background
+                ],
+                "next_anamnesis" => [
+                    "reason_consultation" => $request->reason_consultation
+                ],
+                "clinical_evaluation" => [
+                    "postural_observation" => $request->postural_observation,
+                    "palpation" => $request->palpation,
+                    "flexibility" => $request->flexibility,
+                    "muscle_evaluation" => $request->muscle_evaluation,
+                    "neurological_evaluation" => $request->neurological_evaluation,
+                    "functional_testing" => $request->functional_testing
+                ]
+            ]);
+
+            // UPDATE RECORD OBJECT
+            $record->anamnesis = $anamnesis;
+            $record->save();
+
+            return redirect()->back()->with(['message' => 'Actualización éxitosa! ✨',])->withInput();
+
+
+        } catch(\Exception $e){
+            Log::error("RECORD UPDATE ERROR 🔥", [$e]);
+            return back()->with(['error' => 'Error al intentar actualizar ficha 😢'])->withInput();
+        }
     }
 
 
@@ -268,7 +316,20 @@ class RecordController extends Controller
 
         try {
 
-            // TODO: DESTROY CLINICAL RECORD & PATIENT AND APPOINTMENTS ASSOCIATED
+            $record = $this->record->findByUuid($uuid);
+            $appointments = $this->appointment->findByRecord($record->id);
+            $patient = $this->patient->findById($record->patient_id);
+
+            // * DELETES APPOINTMENTS OBJECTS
+            foreach ($appointments as $appointment){
+                $appointment->delete();
+            }
+
+            // * DELETES RECORD OBJECT
+            $record->delete();
+
+            // * DELETES PATIENT OBJECT
+            $patient->delete();
 
             return redirect()->route('records')->with(['message' => 'Ficha clínica eliminada exitosamente! ✨']);
 

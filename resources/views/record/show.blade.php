@@ -38,8 +38,8 @@
                         <div class="collapse" id="collapseDetails">
                             <div class="row d-flex mt-2">
                                 <ul class="list-group list-group-horizontal-sm">
-                                    <li class="list-group-item list-group-item-secondary">Fecha de nacimiento::</li>
-                                    <li class="list-group-item">{{ $patient->birth_date }}</li>
+                                    <li class="list-group-item list-group-item-secondary">Fecha de nacimiento:</li>
+                                    <li class="list-group-item">{{ date('d-m-Y', strtotime($patient->birth_date)) }}</li>
                                     <li class="list-group-item list-group-item-secondary">Correo:</li>
                                     <li class="list-group-item">{{ $patient->email }}</li>
                                     <li class="list-group-item list-group-item-secondary">Cargo:</li>
@@ -60,9 +60,9 @@
 
                 <div class="col-3">
                     <div class="mt-3 mr-3">
-                        <a class="btn btn-secondary ml-2" href="#"><i class="fas fa-edit"></i> Editar</a>
+                        <a class="btn btn-secondary ml-2" href="{{ route('record.edit', ['uuid' => $record->uuid]) }}"><i class="fas fa-edit"></i> Editar</a>
                         <a class="btn btn-danger ml-2 text-white" data-bs-toggle="modal" data-bs-target="#delete-record"><i class="fas fa-trash-alt"></i> Borrar</a>
-                        <a class="btn btn-primary ml-2" target="_blank" href="#"><i class="fas fa-file-pdf"></i> Descargar Ficha</a>
+                        <a class="btn btn-primary ml-2" target="_blank" href="{{ route('record.generate', ['uuid' => $record->uuid]) }}"><i class="fas fa-file-pdf"></i> Generar PDF</a>
                     </div>
                 </div>
 
@@ -108,6 +108,8 @@
 
                     <div class="col align-self-center">
 
+                        @if (count($appointments) > 0)
+
                         <div class="table-responsive">
                             <table id="detailsTable" class="table table-striped table-hover">
                                 <thead>
@@ -119,12 +121,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $i = count($appointments); ?>
                                     @foreach ($appointments as $appointment)
                                     <tr>
-                                        <td>{{ $appointment->id }}</td>
+                                        <td><?php echo $i; ?></td>
                                         <td>{{ date('d-m-Y', strtotime($appointment->consultation_date)) }}</td>
                                         <td>{{ $appointment->evolution }}</td>
                                     </tr>
+                                    <?php $i--; ?>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -133,6 +137,10 @@
                                 {{ $appointments->appends(request()->all())->links() }}
                             </div>
                         </div>
+
+                        @else
+                        <h6>No existen consultas creadas aún 🤷‍♀️</h6>
+                        @endif
 
                     </div>
 
