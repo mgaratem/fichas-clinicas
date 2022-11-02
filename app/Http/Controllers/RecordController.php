@@ -108,7 +108,7 @@ class RecordController extends Controller
             [
                 'name'                  => ['required', 'string'],
                 'paternal_name'         => ['required', 'string'],
-                'maternal_name'         => ['required', 'string'],
+                'maternal_name'         => ['nullable', 'string'],
                 'rut'                   => ['required', 'string', 'cl_rut'],
                 'gender'                => ['required', 'digits:1'],
                 'birth_date'            => ['required', 'date'],
@@ -122,6 +122,7 @@ class RecordController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
+            $maternal_name = null;
             $genders = array(
                 '1' => 'Masculino',
                 '2' => 'Femenino', 
@@ -132,7 +133,6 @@ class RecordController extends Controller
             $userData = [
                 'name'                  => ucwords(strtolower($request->name)),
                 'paternal_name'         => ucwords(strtolower($request->paternal_name)),
-                'maternal_name'         => ucwords(strtolower($request->maternal_name)),
                 'rut'                   => Rut::parse($request->rut)->format(Rut::FORMAT_COMPLETE),
                 'gender'                => $genders[$request->gender],
                 'birth_date'            => date("d-m-Y", strtotime($request->birth_date)),
@@ -141,6 +141,13 @@ class RecordController extends Controller
                 'city'                  => ucwords(strtolower($request->city)),
                 'email'                 => strtolower($request->email)
             ];
+
+
+            if ($request->maternal_name) {
+                $maternal_name = ucwords(strtolower($request->maternal_name));
+            }
+
+            $userData['maternal_name'] = $maternal_name;
 
             if (auth()->user()->occupation == 'KINESIOLOGO' || auth()->user()->isAdmin()) {
                 $view = 'record.kine.next';
