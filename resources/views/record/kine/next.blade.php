@@ -133,7 +133,7 @@
                         <div class="form-button">
                             <div class="row">
                                 <button type="submit">
-                                    {{ __('Siguiente') }}
+                                    {{ __('Crear') }}
                                 </button>
                             </div>
                         </div>

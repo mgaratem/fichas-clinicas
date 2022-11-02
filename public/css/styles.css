@@ -30,6 +30,11 @@ a:hover {
     border: 1px solid #9032bb !important;
 }
 
+.btn-primary:hover {
+    background-color: #690fa1 !important;
+    cursor: pointer;
+}
+
 a.btn-primary:hover {
     background: #480981 !important;
     cursor: pointer;
@@ -337,4 +342,11 @@ form.modal-form input[type="date"]{
 
 form.modal-form input[type="date"]{
     width: 40% !important;
+}
+
+div.record-edit-form{
+    background: #d7bae6;
+    padding: 3rem;
+    border-radius: 10px;
+    position: relative;
 }

@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="form-card-body">
-                    <form class="form-card" action="{{ route('record.next') }}" method="POST">
+                    <form class="form-card" action="{{ route('record.next') }}" method="POST" novalidate>
                         @csrf
 
                         <div class="row pb-3">
@@ -59,7 +59,7 @@
                             <div class="col-6">
                                 <div class="form-item">
                                     <label class="form-label" for="maternal_name">Apellido Materno</label>
-                                    <input type="text" @error('maternal_name') class="form-control is-invalid" @enderror name="maternal_name" value="{{ old('maternal_name') }}" required>
+                                    <input type="text" @error('maternal_name') class="form-control is-invalid" @enderror name="maternal_name" value="{{ old('maternal_name') }}">
                                     @error('maternal_name')
                                     <span class="text-danger">Ingrese un apellido válido</span>
                                     @enderror

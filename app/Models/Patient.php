@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Freshwork\ChileanBundle\Rut;
+
 class Patient extends Model
 {
     use HasFactory;
@@ -45,6 +47,12 @@ class Patient extends Model
         $age = $interval->y;
 
         return $age;
+    }
+
+    public function getFriendlyRut()
+    {
+        $rut = Rut::parse($this->rut)->format(Rut::FORMAT_WITH_DASH);
+        return $rut;
     }
 
 }

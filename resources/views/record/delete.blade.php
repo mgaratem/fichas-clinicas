@@ -6,9 +6,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>¿Estás seguro de que quieres borrar la ficha?</p>
+                <p>¿Estás seguro de que quieres borrar la ficha clínica?</p>
                 <p class="text-danger">Esta acción borrará de forma permanente la ficha clínica 
-                    junto con todas sus consultas y no se puede revertir.
+                    junto con todas sus consultas e información del paciente. <strong>NO SE PUEDE REVERTIR</strong>.
                 </p>
             </div>
             <div class="modal-footer">
