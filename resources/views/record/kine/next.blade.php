@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="form-card-body">
-                    <form class="form-card" action="{{ route('record.store') }}" method="POST">
+                    <form class="form-card" action="{{ route('record.store') }}" method="POST" novalidate>
                         @csrf
 
                         <h4>Anamnesis Remota</h4>

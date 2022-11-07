@@ -25,7 +25,7 @@
 
                             <div class="col-5">
                                 <div class="form-item">
-                                    <label class="form-label" for="rut">RUT</label>
+                                    <label class="form-label" for="rut">RUT *</label>
                                     <input type="text" @error('rut') class="form-control is-invalid" @enderror name="rut" value="{{ old('rut') }}" data-inputmask="'alias': 'rut'" required>
                                     @error('rut')
                                     <span class="text-danger">Ingrese un rut válido</span>
@@ -35,7 +35,7 @@
 
                             <div class="col-7">
                                 <div class="form-item">
-                                    <label class="form-label" for="name">Nombre</label>
+                                    <label class="form-label" for="name">Nombre *</label>
                                     <input type="text" @error('name') class="form-control is-invalid" @enderror name="name" value="{{ old('name') }}" required>
                                     @error('name')
                                     <span class="text-danger">Ingrese un nombre válido</span>
@@ -48,7 +48,7 @@
 
                             <div class="col-6">
                                 <div class="form-item">
-                                    <label class="form-label" for="paternal_name">Apellido Paterno</label>
+                                    <label class="form-label" for="paternal_name">Apellido Paterno *</label>
                                     <input type="text" @error('paternal_name') class="form-control is-invalid" @enderror name="paternal_name" value="{{ old('paternal_name') }}" required>
                                     @error('paternal_name')
                                     <span class="text-danger">Ingrese un apellido válido</span>
@@ -71,7 +71,7 @@
 
                             <div class="col-6">
                                 <div class="form-item">
-                                    <label class="form-label" for="birth_date">Fecha de Nacimiento</label>
+                                    <label class="form-label" for="birth_date">Fecha de Nacimiento *</label>
                                     <input type="date" @error('birth_date') class="form-control is-invalid" @enderror name="birth_date" value="{{ old('birth_date') }}" required>
                                     @error('birth_date')
                                     <span class="text-danger">Ingrese una fecha válida</span>
@@ -81,7 +81,7 @@
 
                             <div class="col-6">
                                 <div class="form-item">
-                                    <label class="form-label" for="gender">Género del Paciente</label>
+                                    <label class="form-label" for="gender">Género del Paciente *</label>
                                     <select class="form-select" name="gender">
                                         <option value="">Elija una opción</option>
                                         <option value="1" {{ old('gender') == 1 ? 'selected' : '' }}>Masculino</option>
@@ -123,7 +123,7 @@
 
                             <div class="col-6">
                                 <div class="form-item">
-                                    <label class="form-label" for="email">Correo Electrónico</label>
+                                    <label class="form-label" for="email">Correo Electrónico *</label>
                                     <input type="email" @error('email') class="form-control is-invalid" @enderror name="email" value="{{ old('email') }}" required>
                                     @error('email')
                                     <span class="text-danger">Ingrese un correo válido</span>
@@ -133,7 +133,7 @@
 
                             <div class="col-6">
                                 <div class="form-item">
-                                    <label class="form-label" for="occupation">Ocupación o Cargo Profesional</label>
+                                    <label class="form-label" for="occupation">Ocupación o Cargo Profesional *</label>
                                     <input type="text" @error('occupation') class="form-control is-invalid" @enderror name="occupation" value="{{ old('occupation') }}" required>
                                     @error('occupation')
                                     <span class="text-danger">Ingrese una ocupación válida</span>

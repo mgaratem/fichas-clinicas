@@ -113,8 +113,8 @@ class RecordController extends Controller
                 'gender'                => ['required', 'digits:1'],
                 'birth_date'            => ['required', 'date'],
                 'occupation'            => ['required', 'string'],
-                'address'               => ['required', 'string'],
-                'city'                  => ['required', 'string'],
+                'address'               => ['nullable', 'string'],
+                'city'                  => ['nullable', 'string'],
                 'email'                 => ['required', 'email']
             ]);
 
@@ -133,6 +133,7 @@ class RecordController extends Controller
             $userData = [
                 'name'                  => ucwords(strtolower($request->name)),
                 'paternal_name'         => ucwords(strtolower($request->paternal_name)),
+                'maternal_name'         => ucwords(strtolower($request->maternal_name)),
                 'rut'                   => Rut::parse($request->rut)->format(Rut::FORMAT_COMPLETE),
                 'gender'                => $genders[$request->gender],
                 'birth_date'            => date("d-m-Y", strtotime($request->birth_date)),
@@ -141,13 +142,6 @@ class RecordController extends Controller
                 'city'                  => ucwords(strtolower($request->city)),
                 'email'                 => strtolower($request->email)
             ];
-
-
-            if ($request->maternal_name) {
-                $maternal_name = ucwords(strtolower($request->maternal_name));
-            }
-
-            $userData['maternal_name'] = $maternal_name;
 
             if (auth()->user()->occupation == 'KINESIOLOGO' || auth()->user()->isAdmin()) {
                 $view = 'record.kine.next';
@@ -176,15 +170,15 @@ class RecordController extends Controller
         try{
             $validator = Validator::make($request->all(),
             [
-                'physical_activity'         => ['required', 'string'],
-                'morbid_background'         => ['required', 'string'],
-                'reason_consultation'       => ['required', 'string'],
-                'postural_observation'      => ['required', 'string'],
-                'palpation'                 => ['required', 'string'],
-                'flexibility'               => ['required', 'string'],
-                'muscle_evaluation'         => ['required', 'string'],
-                'neurological_evaluation'   => ['required', 'string'],
-                'functional_testing'        => ['required', 'string']
+                'physical_activity'         => ['nullable', 'string'],
+                'morbid_background'         => ['nullable', 'string'],
+                'reason_consultation'       => ['nullable', 'string'],
+                'postural_observation'      => ['nullable', 'string'],
+                'palpation'                 => ['nullable', 'string'],
+                'flexibility'               => ['nullable', 'string'],
+                'muscle_evaluation'         => ['nullable', 'string'],
+                'neurological_evaluation'   => ['nullable', 'string'],
+                'functional_testing'        => ['nullable', 'string']
             ]);
 
             if ($validator->fails()){
@@ -231,7 +225,7 @@ class RecordController extends Controller
 
         } catch(\Exception $e){
             Log::error("RECORD STORE ERROR 🔥", [$e]);
-            return back()->with(['error' => 'Error al intentar crear ficha 😢'])->withInput();
+            return redirect()->back()->with(['error' => 'Error al intentar crear ficha 😢'])->withInput();
         }
     }
 
@@ -264,15 +258,15 @@ class RecordController extends Controller
         try{
             $validator = Validator::make($request->all(),
             [
-                'physical_activity'         => ['required', 'string'],
-                'morbid_background'         => ['required', 'string'],
-                'reason_consultation'       => ['required', 'string'],
-                'postural_observation'      => ['required', 'string'],
-                'palpation'                 => ['required', 'string'],
-                'flexibility'               => ['required', 'string'],
-                'muscle_evaluation'         => ['required', 'string'],
-                'neurological_evaluation'   => ['required', 'string'],
-                'functional_testing'        => ['required', 'string']
+                'physical_activity'         => ['nullable', 'string'],
+                'morbid_background'         => ['nullable', 'string'],
+                'reason_consultation'       => ['nullable', 'string'],
+                'postural_observation'      => ['nullable', 'string'],
+                'palpation'                 => ['nullable', 'string'],
+                'flexibility'               => ['nullable', 'string'],
+                'muscle_evaluation'         => ['nullable', 'string'],
+                'neurological_evaluation'   => ['nullable', 'string'],
+                'functional_testing'        => ['nullable', 'string']
             ]);
 
             if ($validator->fails()){

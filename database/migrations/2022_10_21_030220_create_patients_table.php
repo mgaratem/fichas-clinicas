@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('gender');
             $table->date('birth_date');
             $table->string('occupation');
-            $table->string('address');
-            $table->string('city');
-            $table->string('email')->unique()->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('email')->unique();
             $table->timestamps();
         });
 

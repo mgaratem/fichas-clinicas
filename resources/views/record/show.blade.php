@@ -49,9 +49,9 @@
                             <div class="row d-flex mt-2">
                                 <ul class="list-group list-group-horizontal-sm">
                                     <li class="list-group-item list-group-item-secondary">Domicilio:</li>
-                                    <li class="list-group-item">{{ $patient->address }}</li>
+                                    <li class="list-group-item">{{ $patient->address ? $patient->address : '-' }}</li>
                                     <li class="list-group-item list-group-item-secondary">Ciudad:</li>
-                                    <li class="list-group-item">{{ $patient->city }}</li>
+                                    <li class="list-group-item">{{ $patient->city ? $patient->city : '-'}}</li>
                                 </ul>
                             </div>
                         </div>

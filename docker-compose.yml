@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  database:
+    container_name: "fichas_clinicas"
+    image: postgres:14.1-alpine
+    volumes:
+      - ./database/script_db.sql:/docker-entrypoint-initdb.d/script_db.sql
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_DB= ${DB_DATABASE}
+      - POSTGRES_USER= ${DB_USERNAME}
+      - POSTGRES_PASSWORD= ${DB_PASSWORD}
+    ports:
+      - '8991:5432'
+    restart: always
+volumes:
+  database:
+    driver: local
