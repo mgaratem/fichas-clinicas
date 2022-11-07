@@ -114,21 +114,16 @@
                             <table id="detailsTable" class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Nº<i class="fas fa-sort" onclick="sortTableNumbers('detailsTable', 0)"></i></th>
-                                        <th>Fecha Consulta <i class="fas fa-sort" onclick="sortTableWords('detailsTable', 1)"></i></th>
-                                        <th>Evolución</th>
-                                        <th></th>
+                                        <th style="width: 30%">Fecha Consulta <i class="fas fa-sort" onclick="sortTableWords('detailsTable', 1)"></i></th>
+                                        <th style="width: 70%">Evolución</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = count($appointments); ?>
                                     @foreach ($appointments as $appointment)
                                     <tr>
-                                        <td><?php echo $i; ?></td>
                                         <td>{{ date('d-m-Y', strtotime($appointment->consultation_date)) }}</td>
                                         <td>{{ $appointment->evolution }}</td>
                                     </tr>
-                                    <?php $i--; ?>
                                     @endforeach
                                 </tbody>
                             </table>
