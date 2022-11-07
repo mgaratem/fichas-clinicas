@@ -350,3 +350,17 @@ div.record-edit-form{
     border-radius: 10px;
     position: relative;
 }
+
+li.page-item.active > .page-link {
+    background: #e5ccf2;
+    border: #e5ccf2;
+    color: black;
+}
+
+.page-link {
+    color: #631189;
+}
+
+.page-link:hover {
+    color: white;
+}

@@ -49,3 +49,10 @@ Route::group( ['prefix' => 'appointments'] ,function () {
 
 /*_______ PACIENTS _______ */
 Route::get('/patients', 'PatientController@index')->name('patients')->middleware(['auth', 'role']);
+
+
+/*_______ TESTING _______ */
+// ! DO NOT ENABLE IN PRODUCTION!!
+/*
+Route::get('/error', function () { return view('errors.404'); });
+*/
