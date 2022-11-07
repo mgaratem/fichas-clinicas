@@ -15,6 +15,7 @@
         "laravel/ui": "^4.0",
         "mehradsadeghi/laravel-filter-querystring": "^1.1",
         "ramsey/uuid": "^4.5",
+        "spatie/laravel-markdown": "^2.2",
         "twbs/bootstrap": "5.2.2"
     },
     "require-dev": {

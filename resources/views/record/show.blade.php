@@ -71,20 +71,58 @@
             <div class="row justify-content-between mt-3">
                 <div class="col-8 record-col-show">
                     <h4>Anamnesis</h4>
-                    <dl>
-                        <dt>Anamnesis Remota</dt>
-                        <dd>Actividad Física: {{ $anamnesis["remote_anamnesis"]["physical_activity"] }}</dd>
-                        <dd>Antecedentes Mórbidos: {{ $anamnesis["remote_anamnesis"]["morbid_background"] }}</dd>
-                        <dt>Anamnesis Próxima</dt>
-                        <dd>Motivo de Consulta: {{ $anamnesis["next_anamnesis"]["reason_consultation"] }}</dd>
-                        <dt>Evaluación Clínica</dt>
-                        <dd>Observación Postural: {{ $anamnesis["clinical_evaluation"]["postural_observation"] }}</dd>
-                        <dd>Palpación: {{ $anamnesis["clinical_evaluation"]["palpation"] }}</dd>
-                        <dd>Flexibilidad: {{ $anamnesis["clinical_evaluation"]["flexibility"] }}</dd>
-                        <dd>Evaluación muscular: {{ $anamnesis["clinical_evaluation"]["muscle_evaluation"] }}</dd>
-                        <dd>Evaluación Neurológica: {{ $anamnesis["clinical_evaluation"]["neurological_evaluation"] }}</dd>
-                        <dd>Pruebas Funcionales: {{ $anamnesis["clinical_evaluation"]["functional_testing"] }}</dd>
-                    </dl>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Anamnesis Remota</div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Actividad Física: <x-markdown>{{ $anamnesis["remote_anamnesis"]["physical_activity"] }}</x-markdown>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Antecedentes Mórbidos: <x-markdown>{{ $anamnesis["remote_anamnesis"]["morbid_background"] }}</x-markdown>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Anamnesis Próxima</div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Motivo de Consulta: <x-markdown>{{ $anamnesis["next_anamnesis"]["reason_consultation"] }}</x-markdown>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Evaluación Clínica</div>
+                                <ul class="list-group list-group-horizontal-xl">
+                                    <li class="list-group-item">
+                                        Observación Postural: <x-markdown>{{ $anamnesis["clinical_evaluation"]["postural_observation"] }}</x-markdown>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Palpación: <x-markdown>{{ $anamnesis["clinical_evaluation"]["palpation"] }}</x-markdown>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Flexibilidad: <x-markdown>{{ $anamnesis["clinical_evaluation"]["flexibility"] }}</x-markdown>
+                                    </li>
+                                </ul>
+                                <ul class="list-group list-group-horizontal-xl">
+                                    <li class="list-group-item">
+                                        Evaluación muscular: <x-markdown>{{ $anamnesis["clinical_evaluation"]["muscle_evaluation"] }}</x-markdown>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Evaluación Neurológica: <x-markdown>{{ $anamnesis["clinical_evaluation"]["neurological_evaluation"] }}</x-markdown>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Pruebas Funcionales: <x-markdown>{{ $anamnesis["clinical_evaluation"]["functional_testing"] }}</x-markdown>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
